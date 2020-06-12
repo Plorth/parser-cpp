@@ -1,5 +1,5 @@
 /build
-/cget/cget/build
+/cget
 /doxygen
 *.o
 *.swp
