@@ -66,7 +66,7 @@ INSTALL(
 
 INSTALL(
   DIRECTORY
-    ${PROJECT_SOURCE_DIR}/include/peelo
+    ${PROJECT_SOURCE_DIR}/include/plorth
   DESTINATION
     include
 )
