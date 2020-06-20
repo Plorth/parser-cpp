@@ -71,6 +71,14 @@ namespace plorth::parser
     error
   >;
 
+  /**
+   * Attempts to parse an entire Plorth program and returns the AST tokens
+   * encountered in the source code in an vector.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_result parse(
     IteratorT& current,
@@ -94,6 +102,13 @@ namespace plorth::parser
     return parse_result::ok(tokens);
   }
 
+  /**
+   * Attempts to parse single AST token.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_token_result parse_token(
     IteratorT& current,
@@ -131,6 +146,13 @@ namespace plorth::parser
     return parse_symbol(current, end, position);
   }
 
+  /**
+   * Attempts to parse array literal AST token.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_array_result parse_array(
     IteratorT& current,
@@ -196,6 +218,13 @@ namespace plorth::parser
     );
   }
 
+  /**
+   * Attempts to parse object literal AST token.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_object_result parse_object(
     IteratorT& current,
@@ -290,6 +319,13 @@ namespace plorth::parser
     );
   }
 
+  /**
+   * Attempts to parse quote literal AST token.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_quote_result parse_quote(
     IteratorT& current,
@@ -347,6 +383,13 @@ namespace plorth::parser
     );
   }
 
+  /**
+   * Attempts to parse string literal escape sequence.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_escape_sequence_result parse_escape_sequence(
     IteratorT& current,
@@ -461,6 +504,13 @@ namespace plorth::parser
     return parse_escape_sequence_result::ok(result);
   }
 
+  /**
+   * Attempts to parse string literal AST token.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_string_result parse_string(
     IteratorT& current,
@@ -534,6 +584,13 @@ namespace plorth::parser
     );
   }
 
+  /**
+   * Attempts to parse symbol AST token.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_symbol_result parse_symbol(
     IteratorT& current,
@@ -573,6 +630,13 @@ namespace plorth::parser
     );
   }
 
+  /**
+   * Attempts to parse word definition AST token.
+   *
+   * \param current  Iterator pointing to current position in source code.
+   * \param end      Iterator pointing to end of the source code.
+   * \param position Current source code position.
+   */
   template<class IteratorT>
   parse_word_result parse_word(
     IteratorT& current,
