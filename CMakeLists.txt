@@ -2,7 +2,7 @@ CMAKE_MINIMUM_REQUIRED(VERSION 3.12)
 
 PROJECT(
   PlorthParser
-  VERSION 0.1.0
+  VERSION 1.1.0
   DESCRIPTION "Parser for Plorth programming language."
   HOMEPAGE_URL "https://github.com/plorth/parser"
   LANGUAGES CXX
