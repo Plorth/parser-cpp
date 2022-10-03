@@ -4,4 +4,4 @@
 
 Parser for [Plorth programming language](https://plorth.org) written in C++.
 
-[API documentation](https://plorth.github.io/parser-cpp/)
+[API documentation](https://plorth.github.io/parser/)
