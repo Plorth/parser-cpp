@@ -9,6 +9,7 @@ using plorth::parser::ast::object;
 using plorth::parser::ast::quote;
 using plorth::parser::ast::string;
 using plorth::parser::ast::symbol;
+using plorth::parser::ast::token;
 using plorth::parser::ast::visitor;
 using plorth::parser::ast::word;
 
@@ -120,6 +121,25 @@ static void test_visit_word()
   assert(flag);
 }
 
+static void test_visit_token()
+{
+  class another_test_visitor : public visitor<bool&>
+  {
+  public:
+    void visit_token(const std::shared_ptr<token>&, bool& flag) const
+    {
+      flag = true;
+    }
+  };
+  another_test_visitor visitor;
+  auto token = std::make_shared<class symbol>(position, U"test");
+  bool flag = false;
+
+  visitor.visit(token, flag);
+
+  assert(flag);
+}
+
 int main(int argc, char** argv)
 {
   test_visit_array();
@@ -128,6 +148,7 @@ int main(int argc, char** argv)
   test_visit_string();
   test_visit_symbol();
   test_visit_word();
+  test_visit_token();
 
   return EXIT_SUCCESS;
 }

@@ -39,32 +39,55 @@ namespace plorth::parser::ast
     virtual void visit_array(
       const std::shared_ptr<array>& token,
       Args... args
-    ) const {};
+    ) const
+    {
+      visit_token(token, args...);
+    }
 
     virtual void visit_object(
       const std::shared_ptr<object>& token,
       Args... args
-    ) const {};
+    ) const
+    {
+      visit_token(token, args...);
+    }
 
     virtual void visit_quote(
       const std::shared_ptr<quote>& token,
       Args... args
-    ) const {};
+    ) const
+    {
+      visit_token(token, args...);
+    }
 
     virtual void visit_string(
       const std::shared_ptr<string>& token,
       Args... args
-    ) const {};
+    ) const
+    {
+      visit_token(token, args...);
+    }
 
     virtual void visit_symbol(
       const std::shared_ptr<symbol>& token,
       Args... args
-    ) const {};
+    ) const
+    {
+      visit_token(token, args...);
+    }
 
     virtual void visit_word(
       const std::shared_ptr<word>& token,
       Args... args
-    ) const {};
+    ) const
+    {
+      visit_token(token, args...);
+    }
+
+    virtual void visit_token(
+      const std::shared_ptr<token>& token,
+      Args... args
+    ) const {}
 
     void visit(const std::shared_ptr<token>& token, Args... args) const
     {
