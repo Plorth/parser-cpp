@@ -260,16 +260,13 @@ namespace plorth::parser::ast
   {
   public:
     using symbol_type = std::shared_ptr<class symbol>;
-    using quote_type = std::shared_ptr<class quote>;
 
     explicit word(
       const struct position& position,
-      const symbol_type& symbol,
-      const quote_type& quote
+      const symbol_type& symbol
     )
       : token(position)
-      , m_symbol(symbol)
-      , m_quote(quote) {}
+      , m_symbol(symbol) {}
 
     inline enum type type() const
     {
@@ -284,18 +281,8 @@ namespace plorth::parser::ast
       return m_symbol;
     }
 
-    /**
-     * Returns contents of the word.
-     */
-    inline const quote_type& quote() const
-    {
-      return m_quote;
-    }
-
   private:
     /** Identifier of the word. */
     const symbol_type m_symbol;
-    /** Contents of the word. */
-    const quote_type m_quote;
   };
 }

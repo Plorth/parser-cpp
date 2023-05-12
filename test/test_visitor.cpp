@@ -111,9 +111,7 @@ static void test_visit_word()
 {
   test_visitor visitor;
   auto symbol = std::make_shared<class symbol>(position, U"");
-  const quote::container_type children = {};
-  auto quote = std::make_shared<class quote>(position, children);
-  auto token = std::make_shared<word>(position, symbol, quote);
+  auto token = std::make_shared<word>(position, symbol);
   bool flag = false;
 
   visitor.visit(token, flag);

@@ -64,7 +64,7 @@ static void test_string_with_apostrophe()
 
 static void test_word()
 {
-  const auto result = parse(U": foo bar ;");
+  const auto result = parse(U"-> foo");
 
   assert(!!result);
   assert((*result.value())->type() == token::type::word);
