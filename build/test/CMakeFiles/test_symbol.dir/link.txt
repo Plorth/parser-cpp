@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_symbol.dir/test_symbol.cpp.o -o test_symbol 

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/test_quote.dir/test_quote.cpp.o -o test_quote 

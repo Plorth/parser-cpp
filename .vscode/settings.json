@@ -1,0 +1,8 @@
+{
+  "C_Cpp.default.includePath": [
+    "include",
+    "cget/include",
+    "/usr/include",
+    "/usr/include/c++11"
+  ]
+}

@@ -1,0 +1,15 @@
+test_array 1 0.00447901
+test_escape_sequence 1 0.00409745
+test_hello_world 1 0.00435892
+test_object 1 0.00438902
+test_parse 1 0.00421407
+test_quote 1 0.00425776
+test_string 1 0.00456098
+test_symbol 1 0.0043057
+test_token 0 0
+test_utils 0 0
+test_visitor 1 0.00218817
+test_word 1 0.00196627
+---
+test_token
+test_utils
