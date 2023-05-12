@@ -81,14 +81,14 @@ static void test_isword()
   assert(!isword(U']'));
   assert(!isword(U'{'));
   assert(!isword(U'}'));
-  assert(!isword(U':'));
-  assert(!isword(U';'));
   assert(!isword(U','));
   assert(!isword(U' '));
 
   assert(isword(U'a'));
   assert(isword(U'-'));
   assert(isword(U'\u00e4'));
+  assert(isword(U':'));
+  assert(isword(U';'));
 }
 
 int main(int argc, char** argv)

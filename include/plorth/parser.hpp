@@ -138,12 +138,9 @@ namespace plorth::parser
       case '"':
       case '\'':
         return parse_string(current, end, position);
-
-      case ':':
-        return parse_word(current, end, position);
     }
 
-    return parse_symbol(current, end, position);
+    return parse_symbol_or_word(current, end, position);
   }
 
   /**
@@ -631,76 +628,69 @@ namespace plorth::parser
   }
 
   /**
-   * Attempts to parse word definition AST token.
+   * Attempts to parse either symbol or word definition AST token.
    *
    * \param current  Iterator pointing to current position in source code.
    * \param end      Iterator pointing to end of the source code.
    * \param position Current source code position.
    */
   template<class IteratorT>
-  parse_word_result parse_word(
+  parse_token_result parse_symbol_or_word(
     IteratorT& current,
     const IteratorT& end,
     struct position& position
   )
   {
-    struct position word_position;
-    ast::quote::container_type children;
+    struct position symbol_or_word_position;
+    std::u32string buffer;
 
     if (utils::skip_whitespace(current, end, position))
     {
-      return parse_word_result::error({
+      return parse_symbol_result::error({
         position,
-        U"Unexpected end of input; Missing word."
+        U"Unexpected end of input; Missing symbol or word definition."
       });
     }
 
-    word_position = position;
+    symbol_or_word_position = position;
 
-    if (!utils::peek_advance(current, end, position, U':'))
+    if (!utils::isword(*current))
     {
-      return parse_word_result::error({
-        word_position,
-        U"Unexpected input; Missing word."
+      return parse_symbol_result::error({
+        symbol_or_word_position,
+        U"Unexpected input; Missing symbol or word definition."
       });
     }
 
-    const auto symbol_result = parse_symbol(current, end, position);
-
-    if (!symbol_result)
+    do
     {
-      return parse_word_result::error(*symbol_result.error());
+      buffer.append(1, utils::advance(current, position));
+    }
+    while (current < end && utils::isword(*current));
+
+    if (!buffer.compare(U"->"))
+    {
+      const auto symbol_result = parse_symbol(
+        current,
+        end,
+        symbol_or_word_position
+      );
+
+      if (!symbol_result)
+      {
+        return parse_token_result::error(*symbol_result.error());
+      }
+
+      return parse_token_result::ok(
+        std::make_shared<ast::word>(
+          symbol_or_word_position,
+          *symbol_result.value()
+        )
+      );
     }
 
-    for (;;)
-    {
-      if (utils::skip_whitespace(current, end, position))
-      {
-        return parse_word_result::error({
-          word_position,
-          U"Unterminated word; Missing `;'."
-        });
-      }
-      else if (utils::peek_advance(current, end, position, U';'))
-      {
-        break;
-      } else {
-        const auto child_result = parse_token(current, end, position);
-
-        if (!child_result)
-        {
-          return parse_word_result::error(*child_result.error());
-        }
-        children.push_back(*child_result.value());
-      }
-    }
-
-    return parse_word_result::ok(
-      std::make_shared<ast::word>(
-        word_position,
-        *symbol_result.value(),
-        std::make_shared<ast::quote>(word_position, children)
-      )
+    return parse_token_result::ok(
+      std::make_shared<ast::symbol>(symbol_or_word_position, buffer)
     );
   }
 }

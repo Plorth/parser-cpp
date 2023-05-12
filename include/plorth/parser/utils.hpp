@@ -131,7 +131,7 @@ namespace plorth::parser::utils
   static inline bool isword(char32_t c)
   {
     return c != '(' && c != ')' && c != '[' && c != ']' && c != '{'
-      && c != '}' && c != ':' && c != ';' && c != ','
+      && c != '}' && c != ','
       && peelo::unicode::ctype::isgraph(c);
   }
 }
