@@ -31,7 +31,7 @@ static void test_no_arrow_found()
   const auto result = parse(U"invalid");
 
   assert(result);
-  assert((*result.value())->type() == token::type::symbol);
+  assert(result.value()->type() == token::type::symbol);
 }
 
 static void test_no_symbol_found()
@@ -48,7 +48,7 @@ static void test_parse()
   assert(!!result);
   assert(
     std::static_pointer_cast<plorth::parser::ast::word>(
-      (*result.value())
+      result.value()
     )->symbol()->id() == U"foo"
   );
 }

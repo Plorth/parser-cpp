@@ -47,7 +47,7 @@ static void test_empty_quote()
   const auto result = parse(U"()");
 
   assert(!!result);
-  assert((*result.value())->children().size() == 0);
+  assert(result.value()->children().size() == 0);
 }
 
 static void test_quote_with_one_child()
@@ -55,7 +55,7 @@ static void test_quote_with_one_child()
   const auto result = parse(U"( foo )");
 
   assert(!!result);
-  assert((*result.value())->children().size() == 1);
+  assert(result.value()->children().size() == 1);
 }
 
 static void test_quote_with_multiple_children()
@@ -63,7 +63,7 @@ static void test_quote_with_multiple_children()
   const auto result = parse(U"( foo \"bar\" [] )");
 
   assert(!!result);
-  assert((*result.value())->children().size() == 3);
+  assert(result.value()->children().size() == 3);
 }
 
 int main(int argc, char** argv)

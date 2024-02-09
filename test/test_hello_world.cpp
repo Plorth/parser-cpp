@@ -12,9 +12,9 @@ int main(int argc, char** argv)
   const auto result = plorth::parser::parse(begin, end, position);
 
   assert(!!result);
-  assert(result.value()->size() == 2);
-  assert(result.value()->at(0)->type() == plorth::parser::ast::token::type::string);
-  assert(result.value()->at(1)->type() == plorth::parser::ast::token::type::symbol);
+  assert(result.value().size() == 2);
+  assert(result.value()[0]->type() == plorth::parser::ast::token::type::string);
+  assert(result.value()[1]->type() == plorth::parser::ast::token::type::symbol);
 
   return EXIT_SUCCESS;
 }

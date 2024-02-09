@@ -40,7 +40,7 @@ static void test_quotation_mark_separator()
   const auto result = parse(U"\"foo\"");
 
   assert(!!result);
-  assert((*result.value())->value() == U"foo");
+  assert(result.value()->value() == U"foo");
 }
 
 static void test_apostrophe_separator()
@@ -48,7 +48,7 @@ static void test_apostrophe_separator()
   const auto result = parse(U"'foo'");
 
   assert(!!result);
-  assert((*result.value())->value() == U"foo");
+  assert(result.value()->value() == U"foo");
 }
 
 static void test_escape_sequence()
@@ -56,7 +56,7 @@ static void test_escape_sequence()
   const auto result = parse(U"\"\\t\\u0023\"");
 
   assert(!!result);
-  assert((*result.value())->value() == U"\t#");
+  assert(result.value()->value() == U"\t#");
 }
 
 int main(int argc, char** argv)

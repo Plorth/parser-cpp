@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Build
 
 on: [push]
 
@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v4
     - name: configure
       run: pip install wheel && pip install cget && ~/.local/bin/cget install && mkdir build && cd build && cmake -DCMAKE_CXX_FLAGS="-Wall -Werror" ..
     - name: build

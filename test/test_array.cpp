@@ -61,7 +61,7 @@ static void test_empty_array()
   const auto result = parse(U"[]");
 
   assert(!!result);
-  assert((*result.value())->elements().size() == 0);
+  assert(result.value()->elements().size() == 0);
 }
 
 static void test_array_with_one_element()
@@ -69,7 +69,7 @@ static void test_array_with_one_element()
   const auto result = parse(U"[\"foo\"]");
 
   assert(!!result);
-  assert((*result.value())->elements().size() == 1);
+  assert(result.value()->elements().size() == 1);
 }
 
 static void test_array_with_multiple_elements()
@@ -77,7 +77,7 @@ static void test_array_with_multiple_elements()
   const auto result = parse(U"[\"foo\", \"bar\", \"baz\"]");
 
   assert(!!result);
-  assert((*result.value())->elements().size() == 3);
+  assert(result.value()->elements().size() == 3);
 }
 
 static void test_array_with_multiple_elements_with_dangling_comma()
@@ -85,7 +85,7 @@ static void test_array_with_multiple_elements_with_dangling_comma()
   const auto result = parse(U"[\"foo\", \"bar\", \"baz\",]");
 
   assert(!!result);
-  assert((*result.value())->elements().size() == 3);
+  assert(result.value()->elements().size() == 3);
 }
 
 int main(int argc, char** argv)

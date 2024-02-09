@@ -94,9 +94,9 @@ namespace plorth::parser
 
       if (!token_result)
       {
-        return parse_result::error(*token_result.error());
+        return parse_result::error(token_result.error());
       }
-      tokens.push_back(*token_result.value());
+      tokens.push_back(token_result.value());
     }
 
     return parse_result::ok(tokens);
@@ -193,7 +193,7 @@ namespace plorth::parser
 
         if (value_result)
         {
-          elements.push_back(*value_result.value());
+          elements.push_back(value_result.value());
           if (utils::skip_whitespace(current, end, position)
               || (!utils::peek(current, end, U',')
                 && !utils::peek(current, end, U']')))
@@ -205,7 +205,7 @@ namespace plorth::parser
           }
           utils::peek_advance(current, end, position, U',');
         } else {
-          return parse_array_result::error(*value_result.error());
+          return parse_array_result::error(value_result.error());
         }
       }
     }
@@ -268,7 +268,7 @@ namespace plorth::parser
 
       if (!key_result)
       {
-        return parse_object_result::error(*key_result.error());
+        return parse_object_result::error(key_result.error());
       }
 
       if (utils::skip_whitespace(current, end, position))
@@ -290,12 +290,12 @@ namespace plorth::parser
 
       if (!value_result)
       {
-        return parse_object_result::error(*value_result.error());
+        return parse_object_result::error(value_result.error());
       }
 
       properties.push_back(std::make_pair(
-        (*key_result.value())->value(),
-        *value_result.value()
+        key_result.value()->value(),
+        value_result.value()
       ));
 
       if (utils::skip_whitespace(current, end, position)
@@ -368,9 +368,9 @@ namespace plorth::parser
 
         if (child_result)
         {
-          children.push_back(*child_result.value());
+          children.push_back(child_result.value());
         } else {
-          return parse_quote_result::error(*child_result.error());
+          return parse_quote_result::error(child_result.error());
         }
       }
     }
@@ -568,9 +568,9 @@ namespace plorth::parser
 
         if (!escape_sequence_result)
         {
-          return parse_string_result::error(*escape_sequence_result.error());
+          return parse_string_result::error(escape_sequence_result.error());
         }
-        buffer.append(1, *escape_sequence_result.value());
+        buffer.append(1, escape_sequence_result.value());
       } else {
         buffer.append(1, utils::advance(current, position));
       }
@@ -678,13 +678,13 @@ namespace plorth::parser
 
       if (!symbol_result)
       {
-        return parse_token_result::error(*symbol_result.error());
+        return parse_token_result::error(symbol_result.error());
       }
 
       return parse_token_result::ok(
         std::make_shared<ast::word>(
           symbol_or_word_position,
-          *symbol_result.value()
+          symbol_result.value()
         )
       );
     }

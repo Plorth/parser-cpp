@@ -33,7 +33,7 @@ static void test_symbol()
   const auto result = parse(U"foo-bar-baz");
 
   assert(!!result);
-  assert((*result.value())->id() == U"foo-bar-baz");
+  assert(result.value()->id() == U"foo-bar-baz");
 }
 
 int main(int argc, char** argv)

@@ -42,21 +42,21 @@ static void test_unrecognized()
 
 static void test_recognized()
 {
-  assert(*parse(U"\\b").value() == 010);
-  assert(*parse(U"\\t").value() == 011);
-  assert(*parse(U"\\n").value() == 012);
-  assert(*parse(U"\\f").value() == 014);
-  assert(*parse(U"\\r").value() == 015);
-  assert(*parse(U"\\\"").value() == U'"');
-  assert(*parse(U"\\'").value() == U'\'');
-  assert(*parse(U"\\\\").value() == U'\\');
-  assert(*parse(U"\\/").value() == U'/');
+  assert(parse(U"\\b").value() == 010);
+  assert(parse(U"\\t").value() == 011);
+  assert(parse(U"\\n").value() == 012);
+  assert(parse(U"\\f").value() == 014);
+  assert(parse(U"\\r").value() == 015);
+  assert(parse(U"\\\"").value() == U'"');
+  assert(parse(U"\\'").value() == U'\'');
+  assert(parse(U"\\\\").value() == U'\\');
+  assert(parse(U"\\/").value() == U'/');
 }
 
 static void test_hex_escape()
 {
-  assert(*parse(U"\\u00e4").value() == 0x00e4);
-  assert(*parse(U"\\u0fe3").value() == 0x0fe3);
+  assert(parse(U"\\u00e4").value() == 0x00e4);
+  assert(parse(U"\\u0fe3").value() == 0x0fe3);
 }
 
 static void test_unterminated_hex_escape()

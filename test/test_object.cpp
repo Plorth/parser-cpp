@@ -68,7 +68,7 @@ static void test_empty_object()
   const auto result = parse(U"{}");
 
   assert(!!result);
-  assert((*result.value())->properties().size() == 0);
+  assert(result.value()->properties().size() == 0);
 }
 
 static void test_object_with_one_property()
@@ -76,8 +76,8 @@ static void test_object_with_one_property()
   const auto result = parse(U"{\"foo\": \"bar\"}");
 
   assert(!!result);
-  assert((*result.value())->properties().size() == 1);
-  assert((*result.value())->properties()[0].first == U"foo");
+  assert(result.value()->properties().size() == 1);
+  assert(result.value()->properties()[0].first == U"foo");
 }
 
 static void test_object_with_multiple_properties()
@@ -85,9 +85,9 @@ static void test_object_with_multiple_properties()
   const auto result = parse(U"{\"foo\": \"bar\", \"baz\": \"quux\"}");
 
   assert(!!result);
-  assert((*result.value())->properties().size() == 2);
-  assert((*result.value())->properties()[0].first == U"foo");
-  assert((*result.value())->properties()[1].first == U"baz");
+  assert(result.value()->properties().size() == 2);
+  assert(result.value()->properties()[0].first == U"foo");
+  assert(result.value()->properties()[1].first == U"baz");
 }
 
 static void test_object_with_multiple_properties_with_dangling_comma()
@@ -95,7 +95,7 @@ static void test_object_with_multiple_properties_with_dangling_comma()
   const auto result = parse(U"{\"foo\": \"bar\", \"baz\": \"quux\",}");
 
   assert(!!result);
-  assert((*result.value())->properties().size() == 2);
+  assert(result.value()->properties().size() == 2);
 }
 
 int main(int argc, char** argv)
