@@ -1,5 +1,4 @@
 #include <cassert>
-#include <cstdlib>
 
 #include <plorth/parser/ast.hpp>
 #include <plorth/parser/visitor.hpp>
@@ -49,7 +48,8 @@ public:
 
 static const plorth::parser::position position = { U"filename.plorth", 1, 1 };
 
-static void test_visit_array()
+static void
+test_visit_array()
 {
   test_visitor visitor;
   const array::container_type elements = {};
@@ -61,7 +61,8 @@ static void test_visit_array()
   assert(flag);
 }
 
-static void test_visit_object()
+static void
+test_visit_object()
 {
   test_visitor visitor;
   const object::container_type properties = {};
@@ -73,7 +74,8 @@ static void test_visit_object()
   assert(flag);
 }
 
-static void test_visit_quote()
+static void
+test_visit_quote()
 {
   test_visitor visitor;
   const quote::container_type children = {};
@@ -85,7 +87,8 @@ static void test_visit_quote()
   assert(flag);
 }
 
-static void test_visit_string()
+static void
+test_visit_string()
 {
   test_visitor visitor;
   auto token = std::make_shared<string>(position, U"");
@@ -96,7 +99,8 @@ static void test_visit_string()
   assert(flag);
 }
 
-static void test_visit_symbol()
+static void
+test_visit_symbol()
 {
   test_visitor visitor;
   auto token = std::make_shared<symbol>(position, U"");
@@ -107,7 +111,8 @@ static void test_visit_symbol()
   assert(flag);
 }
 
-static void test_visit_word()
+static void
+test_visit_word()
 {
   test_visitor visitor;
   auto symbol = std::make_shared<class symbol>(position, U"");
@@ -119,7 +124,8 @@ static void test_visit_word()
   assert(flag);
 }
 
-static void test_visit_token()
+static void
+test_visit_token()
 {
   class another_test_visitor : public visitor<bool&>
   {
@@ -138,7 +144,8 @@ static void test_visit_token()
   assert(flag);
 }
 
-int main(int argc, char** argv)
+int
+main()
 {
   test_visit_array();
   test_visit_object();
@@ -147,6 +154,4 @@ int main(int argc, char** argv)
   test_visit_symbol();
   test_visit_word();
   test_visit_token();
-
-  return EXIT_SUCCESS;
 }

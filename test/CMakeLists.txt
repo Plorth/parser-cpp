@@ -18,7 +18,13 @@ FOREACH(TEST_FILENAME ${TEST_SOURCES})
       cxx_std_17
   )
 
-  IF(NOT WIN32)
+  IF(MSVC)
+    TARGET_COMPILE_OPTIONS(
+      ${TEST_NAME}
+      PRIVATE
+        /W4 /WX
+    )
+  ELSE()
     TARGET_COMPILE_OPTIONS(
       ${TEST_NAME}
       PRIVATE

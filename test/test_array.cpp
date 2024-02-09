@@ -1,11 +1,11 @@
 #include <cassert>
-#include <cstdlib>
 
 #include <plorth/parser.hpp>
 
 using plorth::parser::parse_array;
 
-static auto parse(const std::u32string& source)
+static auto
+parse(const std::u32string& source)
 {
   auto begin = std::cbegin(source);
   const auto end = std::cend(source);
@@ -14,81 +14,92 @@ static auto parse(const std::u32string& source)
   return parse_array<std::u32string::const_iterator>(begin, end, position);
 }
 
-static void test_eof_before_the_array()
+static void
+test_eof_before_the_array()
 {
   const auto result = parse(U"");
 
   assert(!result);
 }
 
-static void test_no_bracket_found()
+static void
+test_no_bracket_found()
 {
   const auto result = parse(U"invalid");
 
   assert(!result);
 }
 
-static void test_unterminated_array()
+static void
+test_unterminated_array()
 {
   const auto result = parse(U"[");
 
   assert(!result);
 }
 
-static void test_unterminated_array_after_element()
+static void
+test_unterminated_array_after_element()
 {
   const auto result = parse(U"[\"foo\"");
 
   assert(!result);
 }
 
-static void test_unterminated_array_after_comma()
+static void
+test_unterminated_array_after_comma()
 {
   const auto result = parse(U"[\"foo\",");
 
   assert(!result);
 }
 
-static void test_elements_without_comma()
+static void
+test_elements_without_comma()
 {
   const auto result = parse(U"[\"foo\" \"bar\"");
 
   assert(!result);
 }
 
-static void test_empty_array()
+static void
+test_empty_array()
 {
   const auto result = parse(U"[]");
 
-  assert(!!result);
-  assert(result.value()->elements().size() == 0);
+  assert(result.has_value());
+  assert((*result)->elements().size() == 0);
 }
 
-static void test_array_with_one_element()
+static void
+test_array_with_one_element()
 {
   const auto result = parse(U"[\"foo\"]");
 
-  assert(!!result);
-  assert(result.value()->elements().size() == 1);
+  assert(result.has_value());
+  assert((*result)->elements().size() == 1);
 }
 
-static void test_array_with_multiple_elements()
+static void
+test_array_with_multiple_elements()
 {
   const auto result = parse(U"[\"foo\", \"bar\", \"baz\"]");
 
-  assert(!!result);
-  assert(result.value()->elements().size() == 3);
+  assert(result.has_value());
+  assert((*result)->elements().size() == 3);
 }
 
-static void test_array_with_multiple_elements_with_dangling_comma()
+static void
+test_array_with_multiple_elements_with_dangling_comma()
 {
   const auto result = parse(U"[\"foo\", \"bar\", \"baz\",]");
 
-  assert(!!result);
-  assert(result.value()->elements().size() == 3);
+  assert(result.has_value());
+  assert((*result)->elements().size() == 3);
 }
 
-int main(int argc, char** argv)
+int
+main()
 {
   test_eof_before_the_array();
   test_no_bracket_found();
@@ -101,6 +112,4 @@ int main(int argc, char** argv)
   test_array_with_one_element();
   test_array_with_multiple_elements();
   test_array_with_multiple_elements_with_dangling_comma();
-
-  return EXIT_SUCCESS;
 }

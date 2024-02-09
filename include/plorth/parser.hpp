@@ -96,7 +96,7 @@ namespace plorth::parser
       {
         return parse_result::error(token_result.error());
       }
-      tokens.push_back(token_result.value());
+      tokens.push_back(*token_result);
     }
 
     return parse_result::ok(tokens);
@@ -193,7 +193,7 @@ namespace plorth::parser
 
         if (value_result)
         {
-          elements.push_back(value_result.value());
+          elements.push_back(*value_result);
           if (utils::skip_whitespace(current, end, position)
               || (!utils::peek(current, end, U',')
                 && !utils::peek(current, end, U']')))
@@ -294,8 +294,8 @@ namespace plorth::parser
       }
 
       properties.push_back(std::make_pair(
-        key_result.value()->value(),
-        value_result.value()
+        (*key_result)->value(),
+        *value_result
       ));
 
       if (utils::skip_whitespace(current, end, position)
@@ -368,7 +368,7 @@ namespace plorth::parser
 
         if (child_result)
         {
-          children.push_back(child_result.value());
+          children.push_back(*child_result);
         } else {
           return parse_quote_result::error(child_result.error());
         }
@@ -570,7 +570,7 @@ namespace plorth::parser
         {
           return parse_string_result::error(escape_sequence_result.error());
         }
-        buffer.append(1, escape_sequence_result.value());
+        buffer.append(1, *escape_sequence_result);
       } else {
         buffer.append(1, utils::advance(current, position));
       }
@@ -684,7 +684,7 @@ namespace plorth::parser
       return parse_token_result::ok(
         std::make_shared<ast::word>(
           symbol_or_word_position,
-          symbol_result.value()
+          *symbol_result
         )
       );
     }

@@ -1,11 +1,11 @@
 #include <cassert>
-#include <cstdlib>
 
 #include <plorth/parser.hpp>
 
 using plorth::parser::parse_quote;
 
-static auto parse(const std::u32string& source)
+static auto
+parse(const std::u32string& source)
 {
   auto begin = std::cbegin(source);
   const auto end = std::cend(source);
@@ -14,59 +14,67 @@ static auto parse(const std::u32string& source)
   return parse_quote<std::u32string::const_iterator>(begin, end, position);
 }
 
-static void test_eof_before_the_quote()
+static void
+test_eof_before_the_quote()
 {
   const auto result = parse(U"");
 
   assert(!result);
 }
 
-static void test_no_parenthesis_found()
+static void
+test_no_parenthesis_found()
 {
   const auto result = parse(U"invalid");
 
   assert(!result);
 }
 
-static void test_unterminated_quote()
+static void
+test_unterminated_quote()
 {
   const auto result = parse(U"(");
 
   assert(!result);
 }
 
-static void test_unterminated_quote_after_child()
+static void
+test_unterminated_quote_after_child()
 {
   const auto result = parse(U"(foo");
 
   assert(!result);
 }
 
-static void test_empty_quote()
+static void
+test_empty_quote()
 {
   const auto result = parse(U"()");
 
-  assert(!!result);
-  assert(result.value()->children().size() == 0);
+  assert(result.has_value());
+  assert((*result)->children().size() == 0);
 }
 
-static void test_quote_with_one_child()
+static void
+test_quote_with_one_child()
 {
   const auto result = parse(U"( foo )");
 
-  assert(!!result);
-  assert(result.value()->children().size() == 1);
+  assert(result.has_value());
+  assert((*result)->children().size() == 1);
 }
 
-static void test_quote_with_multiple_children()
+static void
+test_quote_with_multiple_children()
 {
   const auto result = parse(U"( foo \"bar\" [] )");
 
-  assert(!!result);
-  assert(result.value()->children().size() == 3);
+  assert(result.has_value());
+  assert((*result)->children().size() == 3);
 }
 
-int main(int argc, char** argv)
+int
+main()
 {
   test_eof_before_the_quote();
   test_no_parenthesis_found();
@@ -76,6 +84,4 @@ int main(int argc, char** argv)
   test_empty_quote();
   test_quote_with_one_child();
   test_quote_with_multiple_children();
-
-  return EXIT_SUCCESS;
 }
