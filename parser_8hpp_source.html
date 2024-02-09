@@ -134,9 +134,9 @@ $(function() {
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160; </div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;      <span class="keywordflow">if</span> (!token_result)</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;      {</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> parse_result::error(*token_result.error());</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        <span class="keywordflow">return</span> parse_result::error(token_result.error());</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      }</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      tokens.push_back(*token_result.value());</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      tokens.push_back(token_result.value());</div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    }</div>
 <div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160; </div>
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    <span class="keywordflow">return</span> parse_result::ok(tokens);</div>
@@ -219,7 +219,7 @@ $(function() {
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;        <span class="keywordflow">if</span> (value_result)</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;        {</div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;          elements.push_back(*value_result.value());</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;          elements.push_back(value_result.value());</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;          <span class="keywordflow">if</span> (utils::skip_whitespace(current, end, <a class="code" href="structplorth_1_1parser_1_1position.html">position</a>)</div>
 <div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;              || (!utils::peek(current, end, U<span class="charliteral">&#39;,&#39;</span>)</div>
 <div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;                &amp;&amp; !utils::peek(current, end, U<span class="charliteral">&#39;]&#39;</span>)))</div>
@@ -231,7 +231,7 @@ $(function() {
 <div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;          }</div>
 <div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;          utils::peek_advance(current, end, <a class="code" href="structplorth_1_1parser_1_1position.html">position</a>, U<span class="charliteral">&#39;,&#39;</span>);</div>
 <div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;          <span class="keywordflow">return</span> parse_array_result::error(*value_result.error());</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;          <span class="keywordflow">return</span> parse_array_result::error(value_result.error());</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;        }</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;      }</div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    }</div>
@@ -287,7 +287,7 @@ $(function() {
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160; </div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;      <span class="keywordflow">if</span> (!key_result)</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;      {</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">return</span> parse_object_result::error(*key_result.error());</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;        <span class="keywordflow">return</span> parse_object_result::error(key_result.error());</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;      }</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160; </div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;      <span class="keywordflow">if</span> (utils::skip_whitespace(current, end, <a class="code" href="structplorth_1_1parser_1_1position.html">position</a>))</div>
@@ -309,12 +309,12 @@ $(function() {
 <div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160; </div>
 <div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;      <span class="keywordflow">if</span> (!value_result)</div>
 <div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;      {</div>
-<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">return</span> parse_object_result::error(*value_result.error());</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;        <span class="keywordflow">return</span> parse_object_result::error(value_result.error());</div>
 <div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;      }</div>
 <div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160; </div>
 <div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;      properties.push_back(std::make_pair(</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        (*key_result.value())-&gt;value(),</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        *value_result.value()</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;        key_result.value()-&gt;value(),</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;        value_result.value()</div>
 <div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;      ));</div>
 <div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160; </div>
 <div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;      <span class="keywordflow">if</span> (utils::skip_whitespace(current, end, <a class="code" href="structplorth_1_1parser_1_1position.html">position</a>)</div>
@@ -380,9 +380,9 @@ $(function() {
 <div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
 <div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;        <span class="keywordflow">if</span> (child_result)</div>
 <div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160;        {</div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;          children.push_back(*child_result.value());</div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;          children.push_back(child_result.value());</div>
 <div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;        } <span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;          <span class="keywordflow">return</span> parse_quote_result::error(*child_result.error());</div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;          <span class="keywordflow">return</span> parse_quote_result::error(child_result.error());</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;        }</div>
 <div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;      }</div>
 <div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    }</div>
@@ -566,9 +566,9 @@ $(function() {
 <div class="line"><a name="l00568"></a><span class="lineno">  568</span>&#160; </div>
 <div class="line"><a name="l00569"></a><span class="lineno">  569</span>&#160;        <span class="keywordflow">if</span> (!escape_sequence_result)</div>
 <div class="line"><a name="l00570"></a><span class="lineno">  570</span>&#160;        {</div>
-<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;          <span class="keywordflow">return</span> parse_string_result::error(*escape_sequence_result.error());</div>
+<div class="line"><a name="l00571"></a><span class="lineno">  571</span>&#160;          <span class="keywordflow">return</span> parse_string_result::error(escape_sequence_result.error());</div>
 <div class="line"><a name="l00572"></a><span class="lineno">  572</span>&#160;        }</div>
-<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;        buffer.append(1, *escape_sequence_result.value());</div>
+<div class="line"><a name="l00573"></a><span class="lineno">  573</span>&#160;        buffer.append(1, escape_sequence_result.value());</div>
 <div class="line"><a name="l00574"></a><span class="lineno">  574</span>&#160;      } <span class="keywordflow">else</span> {</div>
 <div class="line"><a name="l00575"></a><span class="lineno">  575</span>&#160;        buffer.append(1, utils::advance(current, <a class="code" href="structplorth_1_1parser_1_1position.html">position</a>));</div>
 <div class="line"><a name="l00576"></a><span class="lineno">  576</span>&#160;      }</div>
@@ -662,13 +662,13 @@ $(function() {
 <div class="line"><a name="l00678"></a><span class="lineno">  678</span>&#160; </div>
 <div class="line"><a name="l00679"></a><span class="lineno">  679</span>&#160;      <span class="keywordflow">if</span> (!symbol_result)</div>
 <div class="line"><a name="l00680"></a><span class="lineno">  680</span>&#160;      {</div>
-<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;        <span class="keywordflow">return</span> parse_token_result::error(*symbol_result.error());</div>
+<div class="line"><a name="l00681"></a><span class="lineno">  681</span>&#160;        <span class="keywordflow">return</span> parse_token_result::error(symbol_result.error());</div>
 <div class="line"><a name="l00682"></a><span class="lineno">  682</span>&#160;      }</div>
 <div class="line"><a name="l00683"></a><span class="lineno">  683</span>&#160; </div>
 <div class="line"><a name="l00684"></a><span class="lineno">  684</span>&#160;      <span class="keywordflow">return</span> parse_token_result::ok(</div>
 <div class="line"><a name="l00685"></a><span class="lineno">  685</span>&#160;        std::make_shared&lt;ast::word&gt;(</div>
 <div class="line"><a name="l00686"></a><span class="lineno">  686</span>&#160;          symbol_or_word_position,</div>
-<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;          *symbol_result.value()</div>
+<div class="line"><a name="l00687"></a><span class="lineno">  687</span>&#160;          symbol_result.value()</div>
 <div class="line"><a name="l00688"></a><span class="lineno">  688</span>&#160;        )</div>
 <div class="line"><a name="l00689"></a><span class="lineno">  689</span>&#160;      );</div>
 <div class="line"><a name="l00690"></a><span class="lineno">  690</span>&#160;    }</div>
