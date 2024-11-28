@@ -1,2 +1,0 @@
-peelonet/peelo-result@v0.5.0
-peelonet/peelo-unicode@v1.0.0
